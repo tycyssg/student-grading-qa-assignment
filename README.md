@@ -9,4 +9,12 @@ ID | Task | Justification | Story Points
 1 | **As a developer I want to create the CONSTANTS class** | **So that duplication of code can be avoided** | `1`
 2 | **As a developer I want to create the class models** | **So that different actions can be performed** | `2`
 3 | **As a developer I want to create the custom exception classes** | **So that I can use them for all kind of validations** | `2`
-3 | **As a developer I want to create the method which create a new Rubric** | **So that each grad is associated to a Rubric** | `1`
+4 | **As a developer I want to create the method which create a new Rubric** | **So that application flow can start** | `1`
+5 | **As a developer I want to create the methods which gets a all existing Rubrics and get a single Rubric by name** | **N/A** | `2`
+6 | **As a developer I want to create the method that add a criteria to a Rubric** | **So that Rubric criteria can be populated** | `1`
+7 | **As a developer I want to create the method that add a student grade to a Rubric** | **So that Rubric student scores can be populated** | `1`
+8 | **As a developer I want to create the method that get the grade of a Rubric for a specific Student** | **So that the user can get the grade of a student** | `2`
+9 | **As a developer I want to create the methods that get the Min and Max grade from a Rubric** | **So that the user can check these details** | `5`
+10 | **As a developer I want to create the method that standard deviation grade from a Rubric** | **So that the user can check these details** | `3`
+11 | **As a developer I want to create the methods that get the Min and Max score from a Student grade** | **So that the user can check these details** | `3`
+12 | **As a developer I want to create the methods that get the Standard Deviation score from a Student grade** | **So that the user can check these details** | `2`
