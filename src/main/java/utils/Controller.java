@@ -2,6 +2,7 @@ package utils;
 
 import Exceptions.ExistException;
 import Exceptions.InvalidException;
+import Exceptions.NotExistException;
 import Exceptions.RequiredException;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,10 +19,7 @@ import static utils.Constants.*;
 public class Controller {
     private List<Rubric> rubricList = new ArrayList<>();
 
-    public void addRubric(String rubricName, List<Criteria> criteriaList) throws ExistException, InvalidException, RequiredException {
-        if (rubricName == null) {
-            throw new RequiredException(Constants.nameParamRequired("rubric"));
-        }
+    public Rubric addRubric(String rubricName, List<Criteria> criteriaList) throws ExistException, InvalidException, RequiredException {
 
         if (checkIfRubricExist(rubricName)) {
             throw new ExistException(RUBRIC_EXIST);
@@ -35,10 +33,26 @@ public class Controller {
             throw new InvalidException(MAX_RUBRIC_CRITERIA);
         }
 
-        rubricList.add(new Rubric(rubricName, criteriaList));
+        Rubric r = new Rubric(rubricName, criteriaList);
+        rubricList.add(r);
+        return r;
     }
 
-    private boolean checkIfRubricExist(String rubricName) {
+    public Rubric getRubric(String rubricName) throws NotExistException, RequiredException {
+        if (!checkIfRubricExist(rubricName)) {
+            throw new NotExistException(INVALID_RUBRIC);
+        }
+
+        return rubricList.stream().filter(r -> r.getName().equals(rubricName)).findFirst().orElse(null);
+    }
+
+    private boolean checkIfRubricExist(String rubricName) throws RequiredException {
+        if (rubricName == null) {
+            throw new RequiredException(Constants.nameParamRequired("rubric"));
+        }
+
         return rubricList.stream().anyMatch(r -> r.getName().equals(rubricName));
     }
+
+
 }
