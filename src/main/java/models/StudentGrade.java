@@ -1,12 +1,12 @@
 package models;
 
-import java.util.Map;
 import Exceptions.InvalidException;
+import Exceptions.RequiredException;
 import lombok.Getter;
 import lombok.ToString;
-import utils.Constants;
-import Exceptions.RequiredException;
+
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static utils.Constants.*;
@@ -45,12 +45,12 @@ public class StudentGrade {
     }
 
 
-            public void setScore(String criteriaName, Double score) throws InvalidException, RequiredException {
-                if (!this.scores.containsKey(criteriaName))
-                    throw new InvalidException(INVALID_CRITERIA);
+    public void setScore(String criteriaName, Double score) throws InvalidException, RequiredException {
+        if (!this.scores.containsKey(criteriaName))
+            throw new InvalidException(INVALID_CRITERIA);
 
-                this.scores.put(criteriaName, checkScore(score));
-            }
+        this.scores.put(criteriaName, checkScore(score));
+    }
 
     public Double getGrade() throws InvalidException {
         checkScoreListSize();

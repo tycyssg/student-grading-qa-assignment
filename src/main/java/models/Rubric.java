@@ -59,8 +59,13 @@ public class Rubric {
     }
 
 
-    public double getGrade(String studentName) throws RequiredException, ExistException, InvalidException {
-        checkIfStudentExist(studentName);
+    public double getGrade(String studentName) throws RequiredException, InvalidException, NotExistException {
+        boolean studentExist = checkIfStudentExist(studentName);
+
+        if (!studentExist) {
+            throw new NotExistException(STUDENT_NOT_EXIST);
+        }
+
         return studentGrades.stream().filter(s -> s.getStudentName().equals(studentName)).findFirst().get().getGrade();
     }
 

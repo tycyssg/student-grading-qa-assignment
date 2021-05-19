@@ -244,4 +244,27 @@ public class ApplicationTest {
         String message = exception.getMessage();
         Assertions.assertTrue(message.contains(RUBRIC_STUDENT_GRADES_EMPTY));
     }
+
+    @Test
+    public void getGradeOfStudentWhichNotExits() throws RequiredException, InvalidException, ExistException {
+        Rubric r = controller.addRubric("Test", criteriaList);
+        r.addStudentGrade("Ciprian");
+        Exception exception = Assertions.assertThrows(NotExistException.class, () -> r.getGrade("Ciprian1"));
+
+        String message = exception.getMessage();
+        Assertions.assertTrue(message.contains(STUDENT_NOT_EXIST));
+    }
+
+    @Test
+    public void getGradeOfStudent() throws RequiredException, InvalidException, ExistException, NotExistException {
+        Rubric r = controller.addRubric("Test", criteriaList);
+        StudentGrade sg = r.addStudentGrade("Ciprian");
+        sg.setScore("C1", 2.0);
+        sg.setScore("C2", 2.0);
+        sg.setScore("C3", 2.0);
+
+        Assertions.assertEquals(2, r.getGrade("Ciprian"));
+    }
+
+
 }
