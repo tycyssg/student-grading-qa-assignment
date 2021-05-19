@@ -162,7 +162,7 @@ public class ApplicationTest {
         Rubric r = controller.addRubric("Test", criteriaList);
         r.addStudentGrade("Ciprian");
 
-        Exception exception = Assertions.assertThrows(NotExistException.class, () -> r.addCriteria("Ciprian"));
+        Exception exception = Assertions.assertThrows(ExistException.class, () -> r.addStudentGrade("Ciprian"));
 
         String message = exception.getMessage();
         Assertions.assertTrue(message.contains(STUDENT_EXIST));
