@@ -65,5 +65,15 @@ public class StudentGrade {
         }
     }
 
+    public double getMinScore() throws InvalidException {
+        checkScoreListSize();
+        return scores.values().stream().mapToDouble(v -> v).min().orElse(0);
+    }
+
+    public double getMaxScore() throws InvalidException {
+        checkScoreListSize();
+        return scores.values().stream().mapToDouble(v -> v).max().orElse(0);
+    }
+
 
 }
