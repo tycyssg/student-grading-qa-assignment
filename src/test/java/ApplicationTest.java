@@ -352,4 +352,26 @@ public class ApplicationTest {
 
         Assertions.assertEquals(0.816496580927726, r.getStandardDeviation());
     }
+
+    @Test
+    public void getMinScore() throws RequiredException, InvalidException, ExistException {
+        Rubric r = controller.addRubric("Test", criteriaList);
+        StudentGrade sg = r.addStudentGrade("Ciprian");
+        sg.setScore("C1", 2.0);
+        sg.setScore("C2", 4.0);
+        sg.setScore("C3", 1.0);
+
+        Assertions.assertEquals(1, sg.getMinScore());
+    }
+
+    @Test
+    public void getMaxScore() throws RequiredException, InvalidException, ExistException {
+        Rubric r = controller.addRubric("Test", criteriaList);
+        StudentGrade sg = r.addStudentGrade("Ciprian");
+        sg.setScore("C1", 2.0);
+        sg.setScore("C2", 4.0);
+        sg.setScore("C3", 1.0);
+
+        Assertions.assertEquals(4, sg.getMaxScore());
+    }
 }
