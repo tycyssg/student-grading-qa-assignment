@@ -37,7 +37,7 @@ public class Rubric {
         criteriaList.add(new Criteria(criteriaName));
     }
 
-    public StudentGrade addStudentGrade(String studentName, List<Criteria> criteriaList) throws RequiredException, ExistException {
+    public StudentGrade addStudentGrade(String studentName) throws RequiredException, ExistException {
         boolean studentExist = checkIfStudentExist(studentName);
 
         if (studentExist) {
