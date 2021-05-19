@@ -178,4 +178,6 @@ public class ApplicationTest {
         String message = exception.getMessage();
         Assertions.assertTrue(message.contains(STUDENT_NOT_EXIST));
     }
+
+
 }

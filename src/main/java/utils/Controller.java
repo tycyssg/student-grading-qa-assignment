@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import models.Criteria;
 import models.Rubric;
+import models.StudentGrade;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,10 +57,10 @@ public class Controller {
         rubric.addCriteria(criteriaName);
     }
 
-    public void createStudentGrade(String rubricName, String studentName) throws NotExistException, RequiredException, ExistException {
+    public StudentGrade createStudentGrade(String rubricName, String studentName) throws NotExistException, RequiredException, ExistException {
         Rubric rubric = getRubric(rubricName);
 
-        rubric.addStudentGrade(studentName, rubric.getCriteriaList());
+        return rubric.addStudentGrade(studentName, rubric.getCriteriaList());
     }
 
     private boolean checkIfRubricExist(String rubricName) throws RequiredException {

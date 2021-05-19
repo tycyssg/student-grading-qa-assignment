@@ -2,6 +2,7 @@ package models;
 
 
 import Exceptions.ExistException;
+import Exceptions.InvalidException;
 import Exceptions.NotExistException;
 import Exceptions.RequiredException;
 import lombok.Data;
@@ -36,14 +37,16 @@ public class Rubric {
         criteriaList.add(new Criteria(criteriaName));
     }
 
-    public void addStudentGrade(String studentName, List<Criteria> criteriaList) throws RequiredException, ExistException {
+    public StudentGrade addStudentGrade(String studentName, List<Criteria> criteriaList) throws RequiredException, ExistException {
         boolean studentExist = checkIfStudentExist(studentName);
 
         if (studentExist) {
             throw new ExistException(STUDENT_EXIST);
         }
 
-        studentGrades.add(new StudentGrade(studentName, criteriaList));
+        StudentGrade sg = new StudentGrade(studentName, criteriaList);
+        studentGrades.add(sg);
+        return sg;
     }
 
     public StudentGrade getStudentGrade(String studentName) throws RequiredException, NotExistException {
@@ -54,6 +57,13 @@ public class Rubric {
         }
         return studentGrades.stream().filter(r -> r.getStudentName().equals(studentName)).findFirst().orElse(null);
     }
+
+
+    public double getGrade(String studentName) throws RequiredException, ExistException, InvalidException {
+        checkIfStudentExist(studentName);
+        return studentGrades.stream().filter(s -> s.getStudentName().equals(studentName)).findFirst().get().getGrade();
+    }
+
 
     private boolean checkIfStudentExist(String studentName) throws RequiredException {
         if (studentName == null) {
