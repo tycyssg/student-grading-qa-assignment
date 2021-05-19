@@ -46,6 +46,16 @@ public class Controller {
         return rubricList.stream().filter(r -> r.getName().equals(rubricName)).findFirst().orElse(null);
     }
 
+    public void addCriteriaToARubric(String rubricName, String criteriaName) throws NotExistException, InvalidException, ExistException, RequiredException {
+        Rubric rubric = getRubric(rubricName);
+
+        if (rubric.getCriteriaList().size() == 10) {
+            throw new InvalidException(MAX_RUBRIC_CRITERIA);
+        }
+
+        rubric.addCriteria(criteriaName);
+    }
+
     private boolean checkIfRubricExist(String rubricName) throws RequiredException {
         if (rubricName == null) {
             throw new RequiredException(Constants.nameParamRequired("rubric"));
