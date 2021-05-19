@@ -266,5 +266,54 @@ public class ApplicationTest {
         Assertions.assertEquals(2, r.getGrade("Ciprian"));
     }
 
+    @Test
+    public void getMinGradeOfRubricEmptyGradeSize() throws RequiredException, InvalidException, ExistException {
+        Rubric r = controller.addRubric("Test", criteriaList);
+        Exception exception = Assertions.assertThrows(InvalidException.class, r::getMinGrade);
+
+        String message = exception.getMessage();
+        Assertions.assertTrue(message.contains(STUDENT_GRADES_EMPTY));
+    }
+
+    @Test
+    public void getMaxGradeOfRubricEmptyGradeSize() throws RequiredException, InvalidException, ExistException {
+        Rubric r = controller.addRubric("Test", criteriaList);
+        Exception exception = Assertions.assertThrows(InvalidException.class, r::getMaxGrade);
+
+        String message = exception.getMessage();
+        Assertions.assertTrue(message.contains(STUDENT_GRADES_EMPTY));
+    }
+
+    @Test
+    public void getMinGradeOfRubric() throws RequiredException, InvalidException, ExistException {
+        Rubric r = controller.addRubric("Test", criteriaList);
+        StudentGrade sg = r.addStudentGrade("Ciprian");
+        sg.setScore("C1", 2.0);
+        sg.setScore("C2", 2.0);
+        sg.setScore("C3", 2.0);
+
+        StudentGrade sg1 = r.addStudentGrade("John");
+        sg1.setScore("C1", 3.0);
+        sg1.setScore("C2", 3.0);
+        sg1.setScore("C3", 3.0);
+
+        Assertions.assertEquals(2, r.getMinGrade());
+    }
+
+    @Test
+    public void getMaxGradeOfRubric() throws RequiredException, InvalidException, ExistException {
+        Rubric r = controller.addRubric("Test", criteriaList);
+        StudentGrade sg = r.addStudentGrade("Ciprian");
+        sg.setScore("C1", 2.0);
+        sg.setScore("C2", 2.0);
+        sg.setScore("C3", 2.0);
+
+        StudentGrade sg1 = r.addStudentGrade("John");
+        sg1.setScore("C1", 3.0);
+        sg1.setScore("C2", 3.0);
+        sg1.setScore("C3", 3.0);
+
+        Assertions.assertEquals(3, r.getMaxGrade());
+    }
 
 }

@@ -11,6 +11,7 @@ public class Constants {
     public static final String MIN_RUBRIC_CRITERIA = "Each rubric has to contain at least one criteria!";
     public static final String RUBRIC_EXIST = "Rubric already exists!";
     public static final String RUBRIC_STUDENT_GRADES_EMPTY = "The scores for this student are empty";
+    public static final String STUDENT_GRADES_EMPTY = "The student grades list for this rubric is empty!";
     public static final String SCORE_NULL = "The score cannot be null";
 
     public static String nameParamRequired(String name){

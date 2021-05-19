@@ -69,6 +69,29 @@ public class Rubric {
         return studentGrades.stream().filter(s -> s.getStudentName().equals(studentName)).findFirst().get().getGrade();
     }
 
+    public double getMinGrade() throws InvalidException {
+        checkStudentGradesSize();
+        return studentGrades.stream().mapToDouble(s -> {
+            try {
+                return s.getGrade();
+            } catch (InvalidException e) {
+                e.printStackTrace();
+            }
+            return 0;
+        }).min().orElse(0);
+    }
+
+    public double getMaxGrade() throws InvalidException {
+        checkStudentGradesSize();
+        return studentGrades.stream().mapToDouble(s -> {
+            try {
+                return s.getGrade();
+            } catch (InvalidException e) {
+                e.printStackTrace();
+            }
+            return 0;
+        }).max().orElse(0);
+    }
 
     private boolean checkIfStudentExist(String studentName) throws RequiredException {
         if (studentName == null) {
@@ -76,5 +99,9 @@ public class Rubric {
         }
 
         return studentGrades.stream().anyMatch(s -> s.getStudentName().equals(studentName));
+    }
+
+    private void checkStudentGradesSize() throws InvalidException {
+        if (studentGrades.isEmpty()) throw new InvalidException(STUDENT_GRADES_EMPTY);
     }
 }
