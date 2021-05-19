@@ -75,5 +75,15 @@ public class StudentGrade {
         return scores.values().stream().mapToDouble(v -> v).max().orElse(0);
     }
 
+    public double getStandardDeviation() throws InvalidException {
+        double avg = getGrade();
+        double stDev = 0;
+
+        for (double d : scores.values()) {
+            stDev += Math.pow(d - avg, 2);
+        }
+
+        return Math.sqrt(stDev / scores.size());
+    }
 
 }
