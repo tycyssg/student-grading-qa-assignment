@@ -316,4 +316,19 @@ public class ApplicationTest {
         Assertions.assertEquals(3, r.getMaxGrade());
     }
 
+    @Test
+    public void getAvgOfRubric() throws RequiredException, InvalidException, ExistException {
+        Rubric r = controller.addRubric("Test", criteriaList);
+        StudentGrade sg = r.addStudentGrade("Ciprian");
+        sg.setScore("C1", 3.0);
+        sg.setScore("C2", 3.0);
+        sg.setScore("C3", 3.0);
+
+        StudentGrade sg1 = r.addStudentGrade("John");
+        sg1.setScore("C1", 3.0);
+        sg1.setScore("C2", 3.0);
+        sg1.setScore("C3", 3.0);
+
+        Assertions.assertEquals(3, r.getAvgGrade());
+    }
 }
