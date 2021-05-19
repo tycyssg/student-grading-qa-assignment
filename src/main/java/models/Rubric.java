@@ -58,7 +58,6 @@ public class Rubric {
         return studentGrades.stream().filter(r -> r.getStudentName().equals(studentName)).findFirst().orElse(null);
     }
 
-
     public double getGrade(String studentName) throws RequiredException, InvalidException, NotExistException {
         boolean studentExist = checkIfStudentExist(studentName);
 
@@ -91,6 +90,19 @@ public class Rubric {
             }
             return 0;
         }).max().orElse(0);
+    }
+
+    public double getAvgGrade() throws InvalidException {
+        checkStudentGradesSize();
+        double sum = studentGrades.stream().mapToDouble(s -> {
+            try {
+                return s.getGrade();
+            } catch (InvalidException e) {
+                e.printStackTrace();
+            }
+            return 0;
+        }).sum();
+        return sum / studentGrades.size();
     }
 
     private boolean checkIfStudentExist(String studentName) throws RequiredException {
