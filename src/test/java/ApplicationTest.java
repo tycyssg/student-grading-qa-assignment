@@ -331,4 +331,25 @@ public class ApplicationTest {
 
         Assertions.assertEquals(3, r.getAvgGrade());
     }
+
+    @Test
+    public void getStandardDeviationOfRubric() throws RequiredException, InvalidException, ExistException {
+        Rubric r = controller.addRubric("Test", criteriaList);
+        StudentGrade sg = r.addStudentGrade("Ciprian");
+        sg.setScore("C1", 2.0);
+        sg.setScore("C2", 3.0);
+        sg.setScore("C3", 4.0);
+
+        StudentGrade sg1 = r.addStudentGrade("John");
+        sg1.setScore("C1", 2.0);
+        sg1.setScore("C2", 1.0);
+        sg1.setScore("C3", 3.0);
+
+        StudentGrade sg2 = r.addStudentGrade("Alex");
+        sg2.setScore("C1", 4.0);
+        sg2.setScore("C2", 4.0);
+        sg2.setScore("C3", 4.0);
+
+        Assertions.assertEquals(0.816496580927726, r.getStandardDeviation());
+    }
 }
