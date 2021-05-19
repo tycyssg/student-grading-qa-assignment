@@ -159,12 +159,23 @@ public class ApplicationTest {
 
     @Test
     public void createStudentGradeWithExistingStudent() throws RequiredException, InvalidException, ExistException, NotExistException {
-        controller.addRubric("Test", criteriaList);
-        controller.createStudentGrade("Test", "Ciprian");
+        Rubric r = controller.addRubric("Test", criteriaList);
+        controller.createStudentGrade(r.getName(), "Ciprian");
 
-        Exception exception = Assertions.assertThrows(ExistException.class, () -> controller.createStudentGrade("Test", "Ciprian"));
+        Exception exception = Assertions.assertThrows(NotExistException.class, () -> controller.createStudentGrade("Test", "Ciprian"));
 
         String message = exception.getMessage();
         Assertions.assertTrue(message.contains(STUDENT_EXIST));
+    }
+
+    @Test
+    public void getStudentGradeWithByNotExistingStudent() throws RequiredException, InvalidException, ExistException, NotExistException {
+        Rubric r = controller.addRubric("Test", criteriaList);
+        controller.createStudentGrade(r.getName(), "Ciprian");
+
+        Exception exception = Assertions.assertThrows(NotExistException.class, () -> r.getStudentGrade("CiprianTest"));
+
+        String message = exception.getMessage();
+        Assertions.assertTrue(message.contains(STUDENT_NOT_EXIST));
     }
 }
