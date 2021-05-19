@@ -92,6 +92,17 @@ public class Rubric {
         }).max().orElse(0);
     }
 
+    public double getStandardDeviation() throws InvalidException {
+        double avg = getAvgGrade();
+        double stDev = 0;
+
+        for (StudentGrade s : studentGrades) {
+            stDev += Math.pow(s.getGrade() - avg, 2);
+        }
+
+        return Math.sqrt(stDev / studentGrades.size());
+    }
+
     public double getAvgGrade() throws InvalidException {
         checkStudentGradesSize();
         double sum = studentGrades.stream().mapToDouble(s -> {
