@@ -110,14 +110,14 @@ public class ApplicationTest {
         Assertions.assertEquals(Constants.nameParamRequired("rubric"), message);
     }
 
-    @Test
-    public void addCriteriaWithRubricInvalidName() throws RequiredException, InvalidException, ExistException {
-        controller.addRubric("Test", criteriaList);
-        Exception exception = Assertions.assertThrows(NotExistException.class, () -> controller.addCriteriaToARubric("Test1", "test"));
+        @Test
+        public void addCriteriaWithRubricInvalidName() throws RequiredException, InvalidException, ExistException {
+            controller.addRubric("Test", criteriaList);
+            Exception exception = Assertions.assertThrows(NotExistException.class, () -> controller.addCriteriaToARubric("Test1", "test"));
 
-        String message = exception.getMessage();
-        Assertions.assertTrue(message.contains(INVALID_RUBRIC));
-    }
+            String message = exception.getMessage();
+            Assertions.assertTrue(message.contains(INVALID_RUBRIC));
+        }
 
     @Test
     public void addCriteriaOnRubricWith10Criteria() throws RequiredException, InvalidException, ExistException {
@@ -150,32 +150,121 @@ public class ApplicationTest {
 
     @Test
     public void createStudentGradeWithStudentNameNull() throws RequiredException, InvalidException, ExistException {
-        controller.addRubric("Test", criteriaList);
-        Exception exception = Assertions.assertThrows(RequiredException.class, () -> controller.createStudentGrade("Test", null));
+        Rubric r = controller.addRubric("Test", criteriaList);
+        Exception exception = Assertions.assertThrows(RequiredException.class, () -> r.addStudentGrade(null));
 
         String message = exception.getMessage();
         Assertions.assertEquals(Constants.nameParamRequired("student"), message);
     }
 
     @Test
-    public void createStudentGradeWithExistingStudent() throws RequiredException, InvalidException, ExistException, NotExistException {
+    public void createStudentGradeWithExistingStudent() throws RequiredException, InvalidException, ExistException {
         Rubric r = controller.addRubric("Test", criteriaList);
-        controller.createStudentGrade(r.getName(), "Ciprian");
+        r.addStudentGrade("Ciprian");
 
-        Exception exception = Assertions.assertThrows(NotExistException.class, () -> controller.createStudentGrade("Test", "Ciprian"));
+        Exception exception = Assertions.assertThrows(ExistException.class, () -> r.addStudentGrade("Ciprian"));
 
         String message = exception.getMessage();
         Assertions.assertTrue(message.contains(STUDENT_EXIST));
     }
 
     @Test
-    public void getStudentGradeWithByNotExistingStudent() throws RequiredException, InvalidException, ExistException, NotExistException {
+    public void getStudentGradeWithByNotExistingStudent() throws RequiredException, InvalidException, ExistException {
         Rubric r = controller.addRubric("Test", criteriaList);
-        controller.createStudentGrade(r.getName(), "Ciprian");
+        r.addStudentGrade("Ciprian");
 
         Exception exception = Assertions.assertThrows(NotExistException.class, () -> r.getStudentGrade("CiprianTest"));
 
         String message = exception.getMessage();
         Assertions.assertTrue(message.contains(STUDENT_NOT_EXIST));
     }
+
+    @Test
+    public void setScoreToAStudentInvalidCriteria() throws RequiredException, InvalidException, ExistException {
+        Rubric r = controller.addRubric("Test", criteriaList);
+        StudentGrade sg = r.addStudentGrade("Ciprian");
+
+        Exception exception = Assertions.assertThrows(InvalidException.class, () -> sg.setScore("test", 5.0));
+
+        String message = exception.getMessage();
+        Assertions.assertTrue(message.contains(INVALID_CRITERIA));
+    }
+
+    @Test
+    public void setScoreToAStudentScoreZero() throws RequiredException, InvalidException, ExistException {
+        Rubric r = controller.addRubric("Test", criteriaList);
+        StudentGrade sg = r.addStudentGrade("Ciprian");
+
+        Exception exception = Assertions.assertThrows(InvalidException.class, () -> sg.setScore("C1", 0.0));
+
+        String message = exception.getMessage();
+        Assertions.assertTrue(message.contains(INVALID_SCORE));
+    }
+
+    @Test
+    public void setScoreToAStudentScorePlusOneOverMax() throws RequiredException, InvalidException, ExistException {
+        Rubric r = controller.addRubric("Test", criteriaList);
+        StudentGrade sg = r.addStudentGrade("Ciprian");
+
+        Exception exception = Assertions.assertThrows(InvalidException.class, () -> sg.setScore("C1", 6.0));
+
+        String message = exception.getMessage();
+        Assertions.assertTrue(message.contains(INVALID_SCORE));
+    }
+
+    @Test
+    public void setScoreToAStudentScoreNegative() throws RequiredException, InvalidException, ExistException {
+        Rubric r = controller.addRubric("Test", criteriaList);
+        StudentGrade sg = r.addStudentGrade("Ciprian");
+
+        Exception exception = Assertions.assertThrows(InvalidException.class, () -> sg.setScore("C1", -2.0));
+
+        String message = exception.getMessage();
+        Assertions.assertTrue(message.contains(INVALID_SCORE));
+    }
+
+    @Test
+    public void setScoreToAStudentScoreNull() throws RequiredException, InvalidException, ExistException {
+        Rubric r = controller.addRubric("Test", criteriaList);
+        StudentGrade sg = r.addStudentGrade("Ciprian");
+
+        Exception exception = Assertions.assertThrows(RequiredException.class, () -> sg.setScore("C1", null));
+
+        String message = exception.getMessage();
+        Assertions.assertTrue(message.contains(SCORE_NULL));
+    }
+
+    @Test
+    public void getGradeWithScoresZero() throws RequiredException, InvalidException, ExistException {
+        Rubric r = controller.addRubric("Test", criteriaList);
+        StudentGrade sg = r.addStudentGrade("Ciprian");
+
+        Exception exception = Assertions.assertThrows(InvalidException.class, sg::getGrade);
+
+        String message = exception.getMessage();
+        Assertions.assertTrue(message.contains(RUBRIC_STUDENT_GRADES_EMPTY));
+    }
+
+    @Test
+    public void getGradeOfStudentWhichNotExits() throws RequiredException, InvalidException, ExistException {
+        Rubric r = controller.addRubric("Test", criteriaList);
+        r.addStudentGrade("Ciprian");
+        Exception exception = Assertions.assertThrows(NotExistException.class, () -> r.getGrade("Ciprian1"));
+
+        String message = exception.getMessage();
+        Assertions.assertTrue(message.contains(STUDENT_NOT_EXIST));
+    }
+
+    @Test
+    public void getGradeOfStudent() throws RequiredException, InvalidException, ExistException, NotExistException {
+        Rubric r = controller.addRubric("Test", criteriaList);
+        StudentGrade sg = r.addStudentGrade("Ciprian");
+        sg.setScore("C1", 2.0);
+        sg.setScore("C2", 2.0);
+        sg.setScore("C3", 2.0);
+
+        Assertions.assertEquals(2, r.getGrade("Ciprian"));
+    }
+
+
 }
