@@ -2,6 +2,7 @@ package models;
 
 
 import Exceptions.ExistException;
+import Exceptions.NotExistException;
 import Exceptions.RequiredException;
 import lombok.Data;
 import utils.Constants;
@@ -9,8 +10,7 @@ import utils.Constants;
 import java.util.ArrayList;
 import java.util.List;
 
-import static utils.Constants.CRITERIA_EXIST;
-import static utils.Constants.STUDENT_EXIST;
+import static utils.Constants.*;
 
 
 @Data
@@ -37,16 +37,29 @@ public class Rubric {
     }
 
     public void addStudentGrade(String studentName, List<Criteria> criteriaList) throws RequiredException, ExistException {
-        if (studentName == null) {
-            throw new RequiredException(Constants.nameParamRequired("student"));
-        }
-
-        boolean studentExist = studentGrades.stream().anyMatch(s -> s.getStudentName().equals(studentName));
+        boolean studentExist = checkIfStudentExist(studentName);
 
         if (studentExist) {
             throw new ExistException(STUDENT_EXIST);
         }
 
         studentGrades.add(new StudentGrade(studentName, criteriaList));
+    }
+
+    public StudentGrade getStudentGrade(String studentName) throws RequiredException, NotExistException {
+        boolean studentExist = checkIfStudentExist(studentName);
+
+        if (!studentExist) {
+            throw new NotExistException(STUDENT_NOT_EXIST);
+        }
+        return studentGrades.stream().filter(r -> r.getStudentName().equals(studentName)).findFirst().orElse(null);
+    }
+
+    private boolean checkIfStudentExist(String studentName) throws RequiredException {
+        if (studentName == null) {
+            throw new RequiredException(Constants.nameParamRequired("student"));
+        }
+
+        return studentGrades.stream().anyMatch(s -> s.getStudentName().equals(studentName));
     }
 }
