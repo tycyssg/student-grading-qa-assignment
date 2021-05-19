@@ -374,4 +374,18 @@ public class ApplicationTest {
 
         Assertions.assertEquals(4, sg.getMaxScore());
     }
+
+    @Test
+    public void getSDScore() throws RequiredException, InvalidException, ExistException {
+        Rubric r = controller.addRubric("Test", generateCriteria(6));
+        StudentGrade sg = r.addStudentGrade("Ciprian");
+        sg.setScore("Name0", 2.0);
+        sg.setScore("Name1", 3.0);
+        sg.setScore("Name2", 1.0);
+        sg.setScore("Name3", 5.0);
+        sg.setScore("Name4", 3.0);
+        sg.setScore("Name5", 4.0);
+
+        Assertions.assertEquals(1.2909944487358056, sg.getStandardDeviation());
+    }
 }
