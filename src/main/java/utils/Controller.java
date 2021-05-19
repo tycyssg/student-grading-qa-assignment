@@ -65,4 +65,11 @@ public class Controller {
     }
 
 
+    public void createStudentGrade(String rubricName, String studentName) throws NotExistException, RequiredException, ExistException {
+        Rubric rubric = getRubric(rubricName);
+
+        rubric.addStudentGrade(studentName, rubric.getCriteriaList());
+    }
+
+
 }
