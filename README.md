@@ -22,6 +22,9 @@ ID | Task | Justification | Story Points
 13 | **As a developer I want to create the method that get avg grade of a Rubric** | **So that the user can check these details** | `2`
 14 | **As a developer I want to create the class that which run all the tasks** | **N/A** | `2`
 
+#### At the end of each Sprint all the estimation points of the completed tasks are added up and the total of these points is called velocity. The current sprint velocity is 29 since all the tasks have been completed. In case some tasks are not completed (agile level of completion are 0% or 100%, so even a task is 90% is still considered 0% complete) are not included in the velocity. Assuming the last 2 tasks from the above table will not be completed in this sprint, the sprint velocity will be 25.
+#### The velocity determened in the first sprint will dictate the amount of work the Team can tackle during the next sprint. So for the next sprints the team will now exactly what tasks to include to be sure they complete everything. Sometimes extra things will need to be considered when the tasks are selected, for example the priority, level of dificulty vs team members experience, new requests from the client, etc.
+
 ### Test-Driven development
 ---
 TDD is a software creation methodology in which test cases are created to define and verify what the code can do. To put it another way, test cases for each feature are developed and checked first, and if the test fails, new code is written to pass the test, resulting in code that is simple and bug-free.
