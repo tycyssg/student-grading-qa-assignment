@@ -72,7 +72,7 @@ It will start from a very simple test version and the next step is to write code
 * Does the new code fix the problem?
 * It is the code legible, can it be written in a more simplified way?
 * Are tests which covers all the corner cases from the new code?
-* Is is any unused code whiich may break the application?
+* Is is any unused code which may break the application?
 * Is the name of or classes or methods relevant and correctly spelled?
 * Is all the lint style respected? (Code properly formatted, Ordered Imports, Unused Imports deleted)
 
