@@ -21,9 +21,24 @@ ID | Task | Justification | Story Points
 13 | **As a developer I want to create the method that get avg grade of a Rubric** | **So that the user can check these details** | `2`
 14 | **As a developer I want to create the class that which run all the tasks** | **N/A** | `2`
 
-### Test Driven development
+### Test-Driven development
 ---
 TDD is a software creation methodology in which test cases are created to define and verify what the code can do. To put it another way, test cases for each feature are developed and checked first, and if the test fails, new code is written to pass the test, resulting in code that is simple and bug-free.
+
 It will start from a very simple test version and the next step is to write code just to pass the test. When the written code make the test to pass, the test is improved then the code is improved as well just to pass the latest version of the test. This process keep repeating until the full feature was implemented.
+
 #### The diagram bellow shows the flow in TDD.
-![TDD Flow Diagram]("https://thumbs4.imagebam.com/ea/c4/e5/MEDG4I_t.png", "TDD Flow Diagram")
+![tdd](https://user-images.githubusercontent.com/28993633/118946033-efb26b80-b94d-11eb-8985-5ae116f85df1.png)
+
+##### Following the [COMMIT](https://github.com/tycyssg/student-grading-qa-assignment/commit/d23a8f32d3723c98838d04f83e37e36831aaba45) it can be observed the following development flow.
+
+* Criteria must not be created with name null.
+* In the method test addRubricWithNameNull(); I throw the Exception class; Then I assert a random message.
+* In the method public void addRubric(); I implement an IF statement to check if the name is null, if that is true I throw the exeption.
+* I run the test, the test will fail because I do not know the right message returned by the Exception.class.
+* I modify the Message with the proper one in order to make the test to pass.
+* I refactor the Test method to catch a custom exception such as RequiredException.class and Asserting with a constant custom message.
+* I refactor the addRubric() method to throw the same Exception with the same custom message.
+* I run the test again, It pass...moving to the next functionality.
+
+##### All other tests which are testing the same method was written in the same flow as the above one. All of the tests reflect potential side effects of the method; for example, doing a test to ensure that the object was applied to the List is irrelevant since the logic is part of Java and was almost certainly checked already. It is advised that the test be written only for the developer-created business logic.
