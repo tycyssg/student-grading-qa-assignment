@@ -4,6 +4,7 @@
 #### Since this project is not something which will take a long time, the effort or man hours point could not be implemented. I decided that the simplest task, which is the first taks in the below table to represent 1 point and all other tasks points to be relative to that one. Fibonacci sequence: 1,2,3,5,8 will be used as a sequence when story points are determened.
 ---
 
+#### Backlog 
 ID | Task | Justification | Story Points 
 --- |--- | --- | ---
 1 | **As a developer I want to create the CONSTANTS class** | **So that duplication of code can be avoided** | `1`
@@ -56,4 +57,8 @@ It will start from a very simple test version and the next step is to write code
 
 #### It can be observe in the above picture that the method has test covered for the first part, and the second part where the Criteria is added into the list is not covered in tests. (The red part in this example is wrong, since I do not override the add method from the List, it should ignore that)
 
+### Team version control
+---
+#### Each of the branch created in this project represents a task from the Backlog table. Every branch represents a new feature, and each one includes code that represents the feature's business logic as well as tests that validate all of the business code. All the feature branches have been checked out from the dev branch which represent the starting point.
+#### When the development process is finish, a pull request is made. All the code is being verified and reviews will be added if is the case; then the issues will be fix, the fixes will be verified, if everything is right the pull request will be aproved and then merged into the dev branch.
 
