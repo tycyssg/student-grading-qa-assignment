@@ -30,7 +30,7 @@ It will start from a very simple test version and the next step is to write code
 #### The diagram bellow shows the flow in TDD.
 ![tdd](https://user-images.githubusercontent.com/28993633/118946033-efb26b80-b94d-11eb-8985-5ae116f85df1.png)
 
-##### Following the [COMMIT](https://github.com/tycyssg/student-grading-qa-assignment/commit/d23a8f32d3723c98838d04f83e37e36831aaba45) it can be observed the following development flow.
+#### Following the [COMMIT](https://github.com/tycyssg/student-grading-qa-assignment/commit/d23a8f32d3723c98838d04f83e37e36831aaba45) it can be observed the following development flow.
 
 * Criteria must not be created with name null.
 * In the method test addRubricWithNameNull(); I throw the Exception class; Then I assert a random message.
