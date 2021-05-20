@@ -62,3 +62,19 @@ It will start from a very simple test version and the next step is to write code
 #### Each of the branch created in this project represents a task from the Backlog table. Every branch represents a new feature, and each one includes code that represents the feature's business logic as well as tests that validate all of the business code. All the feature branches have been checked out from the dev branch which represent the starting point.
 #### When the development process is finish, a pull request is made. All the code is being verified and reviews will be added if is the case; then the issues will be fix, the fixes will be verified, if everything is right the pull request will be aproved and then merged into the dev branch.
 
+### Code Reviews
+---
+#### All the code reviwers should follow this guide when they review pull requests. Before start make sure the new branch was checked out from the dev branch and pull request it shows that the current branch will be merged into dev.
+#### To perform a proper review please ask yourself the following questions:
+
+* Are there any obvious logic errors in the code?
+* Looking at the requirements, are all cases fully implemented?
+* Does the new code fix the problem?
+* It is the code legible, can it be written in a more simplified way?
+* Are tests which covers all the corner cases from the new code?
+* Is is any unused code whiich may break the application?
+* Is the name of or classes or methods relevant and correctly spelled?
+* Is all the lint style respected? (Code properly formatted, Ordered Imports, Unused Imports deleted)
+
+
+#### Following the [PULL-REQUEST](https://github.com/tycyssg/student-grading-qa-assignment/pull/11) to observe how the code-review should be performed.
