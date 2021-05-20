@@ -42,3 +42,18 @@ It will start from a very simple test version and the next step is to write code
 * I run the test again, It pass...moving to the next functionality.
 
 ##### All other tests which are testing the same method was written in the same flow as the above one. All of the tests reflect potential side effects of the method; for example, doing a test to ensure that the object was applied to the List is irrelevant since the logic is part of Java and was almost certainly checked already. It is advised that the test be written only for the developer-created business logic.
+
+### Test coverage metric
+---
+#### The tool used is the Coverage tool from Intellij IDE. It simply run the test class with the Coverage tool option as it can be seen in the below picture.
+![1](https://user-images.githubusercontent.com/28993633/118960684-7457b680-b95b-11eb-9395-da56765dcc23.png)
+
+#### The coverage tool analyse the tests and at the end it presents some statistics about how much the tests cover the project.
+![3](https://user-images.githubusercontent.com/28993633/118961158-ea5c1d80-b95b-11eb-8957-2cab3bcbd120.png)
+
+#### The way how it works is as follow: In all the classes from the project on the right side we will see 2 colors along the lines of the code. The green color represent that portion of the code is covered, and the red one is the one which more tests need to be created.
+![2](https://user-images.githubusercontent.com/28993633/118961496-48890080-b95c-11eb-89a8-db2ca87418b7.png)
+
+#### It can be observe in the above picture that the method has test covered for the first part, and the second part where the Criteria is added into the list is not covered in tests. (The red part in this example is wrong, since I do not override the add method from the List, it should ignore that)
+
+
