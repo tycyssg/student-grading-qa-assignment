@@ -20,3 +20,10 @@ ID | Task | Justification | Story Points
 12 | **As a developer I want to create the methods that get the Standard Deviation score from a Student grade** | **So that the user can check these details** | `2`
 13 | **As a developer I want to create the method that get avg grade of a Rubric** | **So that the user can check these details** | `2`
 14 | **As a developer I want to create the class that which run all the tasks** | **N/A** | `2`
+
+### Test Driven development
+---
+TDD is a software creation methodology in which test cases are created to define and verify what the code can do. To put it another way, test cases for each feature are developed and checked first, and if the test fails, new code is written to pass the test, resulting in code that is simple and bug-free.
+It will start from a very simple test version and the next step is to write code just to pass the test. When the written code make the test to pass, the test is improved then the code is improved as well just to pass the latest version of the test. This process keep repeating until the full feature was implemented.
+#### The diagram bellow shows the flow in TDD.
+![TDD Flow Diagram]("https://thumbs4.imagebam.com/ea/c4/e5/MEDG4I_t.png", "TDD Flow Diagram")
